@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
 import axios from 'axios';
+import Timer from './Timer';
+import Guess from './Guess';
 
 function Game() {
     const [backend, setBackend] = useState([{}]);
@@ -8,7 +9,7 @@ function Game() {
     useEffect(() => {
         axios.get('/api')
             .then((response) => {
-                // console.log(response.data);
+                console.log(response);
                 setBackend(response.data);
             })
             .catch((error) => {
@@ -16,9 +17,13 @@ function Game() {
             });
     }, []);
 
+
     return (
         <div>
-            <p>{backend.word}</p>
+            <Timer />
+            <p>{backend.guess}</p>
+            <p>{backend.actual}</p>
+            <Guess />
         </div>
     )
 }

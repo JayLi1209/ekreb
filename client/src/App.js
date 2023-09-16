@@ -3,9 +3,9 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import Home from './Home';
-import Game from './Game';
-import './App.css';
+import Home from './Pages/Home';
+import Game from './Pages/Game';
+import './CSS/App.css';
 
 function App() {
 
