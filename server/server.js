@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser');
-const Helper = require("../client/src/Pages/Helper");
+const Helper = require("../client/src/Components/Helper");
 
 const app = express();
 const PORT = 5001;
@@ -24,7 +24,6 @@ app.get("/api", async (req, res) => {
 app.post('/api/submit', async (req, res) => {
     const word = req.body.input;
     // Process the data and send a response if needed
-    console.log(actual, word);
     if (actual.toLowerCase() === word.toLowerCase()) {
         actual = await Helper.generateWord();
         const guess = Helper.scrambleString(actual);

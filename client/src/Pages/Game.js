@@ -1,5 +1,5 @@
-import Timer from './Timer';
-import Guess from './Guess';
+import Timer from '../Components/Timer';
+import Guess from '../Components/Guess';
 
 function Game() {
     return (
