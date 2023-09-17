@@ -1,20 +1,17 @@
 const express = require("express");
-const axios = require('axios');
 const bodyParser = require('body-parser');
 const Helper = require("../client/src/Pages/Helper");
 
 const app = express();
 const PORT = 5001;
-
-// ******** TODO - this should not be a let variable. ********
 let actual = "";
 
 app.use(bodyParser.json());
 
+
 app.get("/api", async (req, res) => {
     try {
-        const response = await axios.get("https://random-word-api.herokuapp.com/word");
-        actual = response.data[0];
+        actual = await Helper.generateWord();
         const guess = Helper.scrambleString(actual);
         res.json({ actual, guess });
     } catch (error) {
@@ -24,12 +21,25 @@ app.get("/api", async (req, res) => {
 });
 
 // Route to handle incoming data
-app.post('/api/submit', (req, res) => {
+app.post('/api/submit', async (req, res) => {
     const word = req.body.input;
     // Process the data and send a response if needed
     console.log(actual, word);
     if (actual.toLowerCase() === word.toLowerCase()) {
-        res.json({ message: "Right" });
+        actual = await Helper.generateWord();
+        const guess = Helper.scrambleString(actual);
+        // res.json({ message: "Right", guess, actual });
+
+        // Create a JSON object
+        const responseObject = {
+            message: "Right",
+            data: {
+                actual: actual,
+                guess: guess
+            }
+        };
+
+        res.json(responseObject);
     } else {
         res.json({ message: "Wrong" });
     }

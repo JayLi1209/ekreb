@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 function scrambleString(inputString) {
     // Convert the input string to an array of characters
     const charArray = inputString.split('');
@@ -20,6 +22,16 @@ function scrambleString(inputString) {
 }
 
 
+async function generateWord() {
+    try {
+        const response = await axios.get("https://random-word-api.herokuapp.com/word");
+        return response.data[0];
+    } catch (error) {
+        console.error("API: Error fetching word with error: ", error);
+    }
+}
+
 module.exports = {
     scrambleString,
+    generateWord
 };
