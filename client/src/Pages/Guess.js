@@ -84,12 +84,10 @@ function Guess() {
             <p>Losses: {lossesRef.current}</p>
             <Link to="../home"><button>Restart</button></Link>
             <Link to={{
-                pathname: "../stats",
-                state: {
-                    wins: winsRef.current,
-                    losses: lossesRef.current,
-                    row: 1
-                }
+                pathname: "/stats",
+            }} state={{
+                wins: winsRef.current,
+                losses: lossesRef.current
             }}><button>End Game</button></Link>
         </div>
     )
