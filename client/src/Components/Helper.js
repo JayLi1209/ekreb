@@ -31,6 +31,7 @@ async function generateWord() {
     }
 }
 
+
 module.exports = {
     scrambleString,
     generateWord

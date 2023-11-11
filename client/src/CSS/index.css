@@ -36,6 +36,10 @@ code {
   font-family: 'Inter', sans-serif;
 }
 
+div{
+  display: flex;
+}
+
 button {
   color: var(--white);
   background-color: var(--th-orange);

@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const Helper = require("../client/src/Components/Helper");
+const axios = require("axios");
 
 const app = express();
 const PORT = 5001;
@@ -41,6 +42,27 @@ app.post('/api/submit', async (req, res) => {
         res.json(responseObject);
     } else {
         res.json({ message: "Wrong" });
+    }
+});
+
+
+app.get('/api/searchWord/:word', async (req, res) => {
+    const { word } = req.params;
+
+    try {
+        // Make a request to the dictionary API
+        const response = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+
+        if (response?.title === "No Definitions Found") {
+            console.log("Woohoo!");
+            res.json("Woohoo!");
+        } else {
+            // Send the dictionary data to the frontend
+            res.json(response.data);
+        }
+    } catch (error) {
+        console.error('Error searching word:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
